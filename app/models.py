@@ -58,9 +58,9 @@ class Shoe(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
-    description = db.Column(db.String(200))
+    description = db.Column(db.Text)
     price = db.Column(db.Integer)
-    size = db.Column(db.Integer)
+    # size = db.Column(db.Integer)
     # image_url
     # colour
 

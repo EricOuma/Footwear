@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template, url_for
+from flask import flash, redirect, render_template, url_for, current_app
 from flask_login import login_required, login_user, logout_user
 
 from . import auth
@@ -46,8 +46,11 @@ def login():
             # log employee in
             login_user(customer)
 
-            # redirect to the dashboard page after login
-            return redirect(url_for('home.homepage'))
+            # redirect to the appropriate dashboard page
+            if customer.email == current_app.config['ADMIN_EMAIL']:
+                return redirect(url_for('admin.admin_dashboard'))
+            else:
+                return redirect(url_for('home.homepage'))
 
         # when login details are incorrect
         else:
