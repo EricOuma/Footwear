@@ -15,7 +15,7 @@ def register():
     """
     form = RegistrationForm()
     if form.validate_on_submit():
-        customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, phone=form.phone.data, password=form.password.data)
+        customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data, gender=form.gender.data, email=form.email.data, phone=form.phone.data, password=form.password.data)
 
         # add employee to the database
         db.session.add(customer)
@@ -37,9 +37,6 @@ def login():
     """
     form = LoginForm()
     if form.validate_on_submit():
-
-        # check whether customer exists in the database and whether
-        # the password entered matches the password in the database
         customer = Customer.query.filter_by(email=form.email.data).first()
         if customer is not None and customer.verify_password(
                 form.password.data):
@@ -47,7 +44,7 @@ def login():
             login_user(customer)
 
             # redirect to the appropriate dashboard page
-            if customer.email == current_app.config['ADMIN_EMAIL']:
+            if customer.is_admin(customer):
                 return redirect(url_for('admin.admin_dashboard'))
             else:
                 return redirect(url_for('home.homepage'))
