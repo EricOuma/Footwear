@@ -1,20 +1,27 @@
 from flask import current_app
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from enum import Enum, unique
 from datetime import datetime
+from jinja2 import Template
 
 from app import db, login_manager
 
 @unique
 class ShoeSize(Enum):
-    five = '5'
-    six = '6'
-    seven = '7'
-    eight = '8'
-    nine = '9'
-    ten = '10'
-    eleven = '11'
+    FIVE = 5
+    SIX = 6
+    SEVEN = 7
+    EIGHT = 8
+    NINE = 9
+    TEN = 10
+    ELEVEN = 11
+
+    # def __repr__(self):
+    #     return self.value
+
+# template = Template('{{ ShoeSize[db_value].value }} == {{ db_value }}')
+# template.globals['ShoeSize'] = ShoeSize
 
 class Customer(UserMixin, db.Model):
     """
@@ -65,6 +72,13 @@ def load_user(user_id):
     return Customer.query.get(int(user_id))
 
 
+class AnonymousUser(AnonymousUserMixin):
+    """Class for Anonymous users"""
+    def is_admin(self):
+        return False
+
+login_manager.anonymous_user = AnonymousUser
+
 class Shoe(db.Model):
     """
     Create a Shoe table
@@ -76,7 +90,7 @@ class Shoe(db.Model):
     name = db.Column(db.String(25), unique=True)
     description = db.Column(db.Text)
     price = db.Column(db.Integer)
-    size = db.Column(db.String(2))
+    size = db.Column(db.String(6))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
     image_id = db.Column(db.String(30))
@@ -91,7 +105,7 @@ class Shoe(db.Model):
             db.session.commit()
 
     def __repr__(self):
-        return '<Shoe: {}>'.format(self.name)
+        return self.name
 
 
 class Brand(db.Model):
@@ -107,7 +121,7 @@ class Brand(db.Model):
     website = db.Column(db.String(30))
     logo_id = db.Column(db.String(30))
     logo_url = db.Column(db.String(200))
-    shoes = db.relationship('Shoe', backref='role', lazy='dynamic')
+    shoes = db.relationship('Shoe', backref='brand', lazy='dynamic')
 
     @staticmethod
     def delete(self):
@@ -117,4 +131,4 @@ class Brand(db.Model):
             db.session.commit()
 
     def __repr__(self):
-        return '<Brand: {}>'.format(self.name)
+        return self.name

@@ -10,6 +10,8 @@
                 <th scope="col">Logo</th>
                 <th scope="col">Name</th>
                 <th scope="col">Shoes</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +21,8 @@
                     data-toggle="modal" data-target="#exampleModalCenter" height="50" width="50" alt=""></th>
                 <td>{{ brand.name }}</td>
                 <td>{{ brand.shoes.count() }}</td>
+                <td><a href="{{ url_for('.edit_brand', id=brand.id) }}" style="color:green"><i class="fa fa-edit"></i>&nbspEdit</a></td>
+                <td><a href="{{ url_for('.delete_brand', id=brand.id) }}" style="color:red"><i class="fa fa-trash-o"></i>&nbspDelete</a></td>
             </tr>
             {% endfor %}
         </tbody>

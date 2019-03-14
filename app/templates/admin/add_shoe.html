@@ -29,10 +29,12 @@
     {{ form.brand.label }}
     {{ form.brand (class="form-control")}}
 </div>
+{% if not edit %}
 <div class="form-group">
     {{ form.shoe_image.label }}
     {{ form.shoe_image (class="form-control-file")}}
 </div>
+{% endif %}
 {{ form.submit (class="btn btn-primary")}}
 </form>
 </div>

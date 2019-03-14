@@ -21,10 +21,12 @@
             {{ form.website.label }}
             {{ form.website (class="form-control", placeholder="Enter website link")}}
         </div>
+        {% if not edit %}
         <div class="form-group">
             {{ form.brand_logo.label }}
             {{ form.brand_logo (class="form-control-file")}}
         </div>
+        {% endif %}
         {{ form.submit (class="btn btn-primary")}}
     </form>
 </div>

@@ -9,6 +9,7 @@
               <tr>
                 <th scope="col">Photo</th>
                 <th scope="col">Name</th>
+                <th scope="col">Brand</th>
                 <th scope="col">Size</th>
                 <th scope="col">Price</th>
                 <th scope="col">Edit</th>
@@ -21,10 +22,11 @@
                 <th scope="row"><img src="{{ shoe.image_url }}" class="img-fluid rounded-circle  float-left"
                   data-toggle="modal" data-target="#exampleModalCenter" height="50" width="50" alt=""></th>
                 <td>{{ shoe.name }}</td>
+                <td>{{ shoe.brand }}</td>
                 <td>{{ shoe.size }}</td>
                 <td>{{ shoe.price }}</td>
-                <td><a href="{{ url_for('.edit_shoe') }}" style="color:green"><i class="fa fa-edit"></i>Edit</a></td>
-                <td><a href="{{ url_for('.delete_shoe') }}" style="color:red"><i class="fa fa-trash-o"></i>Delete</a></td>
+                <td><a href="{{ url_for('.edit_shoe', id=shoe.id) }}" style="color:green"><i class="fa fa-edit"></i>&nbspEdit</a></td>
+                <td><a href="{{ url_for('.delete_shoe', id=shoe.id) }}" style="color:red"><i class="fa fa-trash-o"></i>&nbspDelete</a></td>
               </tr>
               {% endfor %}
             </tbody>
@@ -41,7 +43,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="" class="img-fluid" height="auto" width="auto" alt="">
+                        <img src="this" class="img-fluid" height="auto" width="auto" alt="">
                     </div>
                 </div>
             </div>
