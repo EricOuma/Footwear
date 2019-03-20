@@ -18,7 +18,7 @@
             {% for brand in brands %}
             <tr>
                 <th scope="row"><img src="{{ brand.logo_url }}" class="img-fluid rounded-circle  float-left"
-                    data-toggle="modal" data-target="#exampleModalCenter" height="50" width="50" alt=""></th>
+                    data-toggle="modal" data-target="#imageModal" data-name="{{ brand.name }}" data-src="{{ brand.logo_url }}" height="50" width="50" alt=""></th>
                 <td>{{ brand.name }}</td>
                 <td>{{ brand.shoes.count() }}</td>
                 <td><a href="{{ url_for('.edit_brand', id=brand.id) }}" style="color:green"><i class="fa fa-edit"></i>&nbspEdit</a></td>
@@ -28,7 +28,7 @@
         </tbody>
     </table>
 </div>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
