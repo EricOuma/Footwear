@@ -14,6 +14,7 @@ class ShoeForm(FlaskForm):
     brand = SelectField('Brand', validators=[DataRequired()], coerce=int)
     price = IntegerField('Price', validators=[DataRequired()])
     size = SelectField('Shoe size', choices=[('', 'Select Shoe size')]+[(name, member.value) for name, member in ShoeSize.__members__.items()], validators=[DataRequired()])
+    quantity = IntegerField('Quantity',  validators=[DataRequired()])
     shoe_image = FileField('Shoe Image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'svg', 'webp'], 'Images only!')])
     submit = SubmitField('Save')
 

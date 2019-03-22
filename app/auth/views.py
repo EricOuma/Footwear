@@ -44,10 +44,10 @@ def login():
             login_user(customer)
 
             # redirect to the appropriate dashboard page
-            if customer.is_admin(customer):
+            if Customer.is_admin(customer):
                 return redirect(url_for('admin.admin_dashboard'))
             else:
-                return redirect(url_for('home.homepage'))
+                return redirect(url_for('home.index'))
 
         # when login details are incorrect
         else:
@@ -68,4 +68,4 @@ def logout():
     flash('You have successfully been logged out.')
 
     # redirect to the login page
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('home.index'))

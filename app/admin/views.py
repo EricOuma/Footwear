@@ -40,7 +40,7 @@ def add_shoe():
     form.brand.choices = [('0', 'Select')]+[(brand.id, brand.name) for brand in Brand.query.order_by('name')]
     if form.validate_on_submit():
         shoe_image = cloudinary.uploader.upload(form.shoe_image.data)
-        shoe = Shoe(name=form.name.data, description=form.description.data, price=form.price.data, size = ShoeSize[form.size.data].value, brand_id=form.brand.data, image_id = shoe_image['public_id'], image_url = shoe_image['secure_url'])
+        shoe = Shoe(name=form.name.data, description=form.description.data, price=form.price.data, size = ShoeSize[form.size.data].value, quantity=form.quantity.data, brand_id=form.brand.data, image_id = shoe_image['public_id'], image_url = shoe_image['secure_url'])
 
         db.session.add(shoe)
         db.session.commit()
@@ -75,6 +75,7 @@ def edit_shoe(id):
         shoe.name = form.name.data
         shoe.descrption = form.description.data
         shoe.size = ShoeSize[form.size.data].value
+        shoe.quantity = form.quantity.data
         shoe.price = form.price.data
         shoe.brand_id = form.brand.data
         # form.populate_obj(shoe)

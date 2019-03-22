@@ -59,7 +59,8 @@
                     {{ form.confirm_password(class="form-control", placeholder="Confirm Password")}}
                 </div>
                 {{ form.submit (class="btn btn-primary")}}
-            </form>
+            </form><br/>
+            <span><a href="{{ url_for('auth.login') }}">Login</a></span>
         </div>
     </div>
 

@@ -17,11 +17,10 @@ class ShoeSize(Enum):
     TEN = 10
     ELEVEN = 11
 
-    # def __repr__(self):
-    #     return self.value
-
-# template = Template('{{ ShoeSize[db_value].value }} == {{ db_value }}')
-# template.globals['ShoeSize'] = ShoeSize
+cart_items = db.Table('cart_items',
+    db.Column('shoe_id', db.Integer, db.ForeignKey('shoes.id'), primary_key=True),
+    db.Column('customer_id', db.Integer, db.ForeignKey('customers.id'), primary_key=True)
+)
 
 class Customer(UserMixin, db.Model):
     """
@@ -37,6 +36,7 @@ class Customer(UserMixin, db.Model):
     phone = db.Column(db.String(10), index=True, unique=True)
     gender = db.Column(db.String(6))
     password_hash = db.Column(db.String(128))
+    cart_items = db.relationship('Shoe', secondary=cart_items, backref=db.backref('cart_items', lazy='dynamic'), lazy='dynamic')
 
     @property
     def password(self):
@@ -91,6 +91,7 @@ class Shoe(db.Model):
     description = db.Column(db.Text)
     price = db.Column(db.Integer)
     size = db.Column(db.String(6))
+    quantity = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     brand_id = db.Column(db.Integer, db.ForeignKey('brands.id'))
     image_id = db.Column(db.String(30))
