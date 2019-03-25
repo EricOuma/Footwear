@@ -1,5 +1,6 @@
 from flask import render_template, redirect, url_for
 from flask_login import login_required, current_user
+from sqlalchemy import func
 
 from . import home
 from app.models import Customer, Shoe, ShoeSize, Brand
@@ -22,7 +23,10 @@ def shoes():
     sizes = [name for name, member in ShoeSize.__members__.items()]
     shoes = Shoe.query.all()
     brands = Brand.query.all()
-    return render_template('home/shoes.html', shoes=shoes, brands=brands, sizes=sizes, title="Shop", active='shoes')
+    min_price = Shoe.query.with_entities(func.min(Shoe.price)).scalar()
+    # min_price = Shoe.query(func.min(Shoe.price)).all()
+    max_price = Shoe.query.with_entities(func.max(Shoe.price)).scalar()
+    return render_template('home/shoes.html', shoes=shoes, brands=brands, sizes=sizes, title="Shop", min_price=min_price, max_price=max_price, active='shoes')
 
 @home.route('/add', methods=['GET', 'POST'])
 def add():
