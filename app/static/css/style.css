@@ -2240,6 +2240,9 @@ ol {
 	.main-menu li a {
 		margin-right: 30px;
 	}
+	li .nav-item .active .nav-link{
+		color: #f51167;
+	}
 	.hero-slider .slider-nav-warp {
 		max-width: 690px;
 	}

@@ -17,6 +17,10 @@ class ShoeSize(Enum):
     TEN = 10
     ELEVEN = 11
 
+# template = Template('{{ ShoeSize[db_value].value }} == {{ db_value }}')
+# template.globals['ShoeSize'] = ShoeSize
+# template.render(db_value='FIVE')
+
 cart_items = db.Table('cart_items',
     db.Column('shoe_id', db.Integer, db.ForeignKey('shoes.id'), primary_key=True),
     db.Column('customer_id', db.Integer, db.ForeignKey('customers.id'), primary_key=True)
@@ -74,6 +78,9 @@ def load_user(user_id):
 
 class AnonymousUser(AnonymousUserMixin):
     """Class for Anonymous users"""
+    def __init__(self):
+        self.email = None
+
     def is_admin(self):
         return False
 
