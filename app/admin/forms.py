@@ -4,7 +4,7 @@ from wtforms import StringField, SelectField, TextAreaField, IntegerField, Submi
 from wtforms.validators import DataRequired, Email, EqualTo, URL, Optional
 
 
-from app.models import ShoeSize, Brand
+from app.models import ShoeSize, Brand, ClothSize
 class ShoeForm(FlaskForm):
     """
     Form for admin to add new shoe
@@ -18,6 +18,17 @@ class ShoeForm(FlaskForm):
     shoe_image = FileField('Shoe Image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'svg', 'webp'], 'Images only!')])
     submit = SubmitField('Save')
 
+class ClothForm(FlaskForm):
+    """
+    Form for admin to add new cloth
+    """
+    name = StringField('Name', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    price = IntegerField('Price', validators=[DataRequired()])
+    size = SelectField('Cloth size', choices=[('', 'Select Cloth size')]+[(name, member.value) for name, member in ClothSize.__members__.items()], validators=[DataRequired()])
+    quantity = IntegerField('Quantity',  validators=[DataRequired()])
+    cloth_image = FileField('Cloth Image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg', 'svg', 'webp'], 'Images only!')])
+    submit = SubmitField('Save')
 
 class BrandForm(FlaskForm):
     """

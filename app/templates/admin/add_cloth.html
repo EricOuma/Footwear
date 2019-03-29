@@ -1,0 +1,42 @@
+{% extends "admin_base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block body %}
+{% block content %}
+<div class="container">
+    <h1>ADD CLOTH PAGE</h1>
+</div>
+<div class="jumbotron">
+    {% include '_form_errors.html' %}
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name (class="form-control", placeholder="Enter name")}}
+        </div>
+        <div class="form-group">
+            {{ form.description.label }}
+            {{ form.description (class="form-control", placeholder="Description")}}
+        </div>
+        <div class="form-group">
+            {{ form.price.label }}
+            {{ form.price (class="form-control", placeholder="Price")}}
+        </div>
+        <div class="form-group">
+            {{ form.size.label }}
+            {{ form.size (class="form-control")}}
+        </div>
+        <div class="form-group">
+            {{ form.quantity.label }}
+            {{ form.quantity (class="form-control")}}
+        </div>
+        {% if not edit %}
+        <div class="form-group">
+            {{ form.cloth_image.label }}
+            {{ form.cloth_image (class="form-control-file")}}
+        </div>
+        {% endif %}
+        {{ form.submit (class="btn btn-primary")}}
+    </form>
+</div>
+{% endblock %}
+{% endblock %}

@@ -6,9 +6,9 @@ from flask_login import current_user, login_required
 
 from app import db
 from . import admin
-from .forms import ShoeForm, BrandForm
+from .forms import ShoeForm, BrandForm, ClothForm
 from app.decorators import is_admin
-from app.models import Shoe, Brand, ShoeSize
+from app.models import Shoe, Brand, ShoeSize, Cloth, ClothSize
 
 # add admin dashboard view
 @admin.route('/dashboard')
@@ -48,6 +48,22 @@ def add_shoe():
         return redirect(url_for('.add_shoe'))
     return render_template('admin/add_shoe.html', form=form, title="Dashboard")
 
+@admin.route('/add_cloth', methods=['GET', 'POST'])
+@login_required
+@is_admin
+def add_cloth():
+    form = ClothForm()
+    if form.validate_on_submit():
+        cloth_image = cloudinary.uploader.upload(form.cloth_image.data)
+        cloth = Cloth(name=form.name.data, description=form.description.data, price=form.price.data, size = ClothSize[form.size.data].value, quantity=form.quantity.data, image_id = cloth_image['public_id'], image_url = cloth_image['secure_url'])
+
+        db.session.add(cloth)
+        db.session.commit()
+
+        return redirect(url_for('.add_cloth'))
+    return render_template('admin/add_cloth.html', form=form, title="Dashboard")
+
+
 @admin.route('/shoes')
 @login_required
 @is_admin
@@ -55,6 +71,12 @@ def all_shoes():
     shoes = Shoe.query.all()
     return render_template('admin/shoes.html', shoes=shoes)
 
+@admin.route('/clothes')
+@login_required
+@is_admin
+def all_clothes():
+    clothes = Cloth.query.all()
+    return render_template('admin/clothes.html', clothes=clothes)
 
 @admin.route('/brands')
 @login_required
@@ -84,9 +106,29 @@ def edit_shoe(id):
         
         return redirect(url_for('.all_shoes'))
     
-    
-
     return render_template('admin/add_shoe.html', form=form, edit=True)
+
+@admin.route('/clothes/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+@is_admin
+def edit_cloth(id):
+    cloth = Cloth.query.get_or_404(id)
+    form = ClothForm(obj=cloth)
+    del form.cloth_image
+    if form.validate_on_submit():
+        cloth.name = form.name.data
+        cloth.descrption = form.description.data
+        cloth.size = ShoeSize[form.size.data].value
+        cloth.quantity = form.quantity.data
+        cloth.price = form.price.data
+        cloth.brand_id = form.brand.data
+        # form.populate_obj(cloth)
+
+        db.session.commit()
+        
+        return redirect(url_for('.all_clothes'))
+    
+    return render_template('admin/add_clothhtml', form=form, edit=True)
 
 @admin.route('/brands/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -113,6 +155,15 @@ def delete_shoe(id):
     cloudinary.uploader.destroy(shoe.image_id, invalidate=True)
     Shoe.delete(shoe)
     return redirect(url_for('.all_shoes'))
+
+@admin.route('/clothes/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+@is_admin
+def delete_cloth(id):
+    cloth = Cloth.query.get_or_404(id)
+    cloudinary.uploader.destroy(cloth.image_id, invalidate=True)
+    Cloth.delete(cloth)
+    return redirect(url_for('.all_clothes'))
 
 @admin.route('/brands/delete/<int:id>', methods=['GET', 'POST'])
 @login_required

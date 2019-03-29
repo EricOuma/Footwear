@@ -33,7 +33,7 @@
 				<div class="filter-widget mb-0">
 					<h2 class="fw-title">Size</h2>
 					<div class="fw-size-choose">
-						{% for size in shoe_sizes %}
+						{% for size in cloth_sizes %}
 						<div class="sc-item">
 							<input type="radio" name="sc" id="xs-size">
 							<label for="xs-size">{{ size }}</label>
@@ -41,36 +41,28 @@
 						{% endfor %}
 					</div>
 				</div>
-				<div class="filter-widget">
-					<h2 class="fw-title">Brand</h2>
-					<ul class="category-menu">
-						{% for brand in brands %}
-						<li><a href="#">{{ brand.name }} <span>({{ brand.shoes.count() }})</span></a></li>
-						{% endfor %}
-					</ul>
-				</div>
 			</div>
 
 			<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
 				<div class="row">
-					{% for shoe in shoes %}
+					{% for cloth in clothes %}
 					<div class="col-lg-4 col-sm-6">
-						<a href="{{ url_for('.product', id=shoe.id, class_name=shoe.__class__.__name__) }}">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{{ shoe.image_url }}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
-											CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+						<a href="{{ url_for('.product', id=cloth.id, class_name=cloth.__class__.__name__) }}">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{{ cloth.image_url }}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
+												CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>Ksh{{ cloth.price }}</h6>
+									<p>{{ cloth.name }}</p>
 								</div>
 							</div>
-							<div class="pi-text">
-								<h6>Ksh{{ shoe.price }}</h6>
-								<p>{{ shoe.name }}</p>
-							</div>
-						</div>
-					</a>
+						</a>
 					</div>
 					{% endfor %}
 					<!-- <div class="text-center w-100 pt-3">
