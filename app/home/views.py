@@ -48,7 +48,7 @@ def product(id, class_name):
     # The classname helps to get the model from which the product is to be fetched
     cloth_sizes = [name for name, member in ClothSize.__members__.items()]
     shoe_sizes = [name for name, member in ShoeSize.__members__.items()]
-    cls_name = globals()[class_name]
+    cls_name = globals()[class_name] # This makes the string in the url an object( a class)
     product = cls_name.query.get_or_404(id)
 
     return render_template('home/product.html', product=product, cloth_sizes=cloth_sizes, shoe_sizes=shoe_sizes)

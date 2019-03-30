@@ -47,22 +47,22 @@
 				<div class="row">
 					{% for cloth in clothes %}
 					<div class="col-lg-4 col-sm-6">
-						<a href="{{ url_for('.product', id=cloth.id, class_name=cloth.__class__.__name__) }}">
-							<div class="product-item">
-								<div class="pi-pic">
+						<div class="product-item">
+							<div class="pi-pic">
+								<a href="{{ url_for('.product', id=cloth.id, class_name=cloth.__class__.__name__) }}">
 									<img src="{{ cloth.image_url }}" alt="">
-									<div class="pi-links">
-										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
-												CART</span></a>
-										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-									</div>
-								</div>
-								<div class="pi-text">
-									<h6>Ksh{{ cloth.price }}</h6>
-									<p>{{ cloth.name }}</p>
+								</a>
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
+											CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
 								</div>
 							</div>
-						</a>
+							<div class="pi-text">
+								<h6>Ksh&nbsp{{ cloth.price }}</h6>
+								<p>{{ cloth.name }}</p>
+							</div>
+						</div>
 					</div>
 					{% endfor %}
 					<!-- <div class="text-center w-100 pt-3">

@@ -92,13 +92,14 @@
 		</div>
 		<div class="product-slider owl-carousel">
 			{% for shoe in l_shoes %}
-			<div class="product-item">
+				<div class="product-item">
 					<div class="pi-pic">
 						<div class="tag-new">New</div>
-						<img src="{{ shoe.image_url }}" alt="">
+						<a href="{{ url_for('.product', id=shoe.id, class_name=shoe.__class__.__name__) }}"><img src="{{ shoe.image_url }}" alt=""></a>
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>FAVORITE</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>FAVORITE</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -106,32 +107,33 @@
 						<p>{{ shoe.name }} </p>
 					</div>
 				</div>
-				{% endfor  %}
+			{% endfor  %}
 		</div>
 	</div>
 	<div class="container">
-			<div class="section-title">
-				<h2>LATEST CLOTHES</h2>
-			</div>
-			<div class="product-slider owl-carousel">
-				{% for cloth in l_clothes %}
+		<div class="section-title">
+			<h2>LATEST CLOTHES</h2>
+		</div>
+		<div class="product-slider owl-carousel">
+			{% for cloth in l_clothes %}
 				<div class="product-item">
-						<div class="pi-pic">
-							<div class="tag-new">New</div>
-							<img src="{{ cloth.image_url }}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>FAVORITE</span></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>Ksh&nbsp{{ cloth.price }}</h6>
-							<p>{{ cloth.name }} </p>
+					<div class="pi-pic">
+						<div class="tag-new">New</div>
+						<a class="d-block" href="{{ url_for('.product', id=cloth.id, class_name=cloth.__class__.__name__) }}"><img src="{{ cloth.image_url }}" alt=""></a>
+						<div class="pi-links">
+							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>FAVORITE</span></a>
 						</div>
 					</div>
-					{% endfor %}
-			</div>
+					<div class="pi-text">
+						<h6>Ksh&nbsp{{ cloth.price }}</h6>
+						<p>{{ cloth.name }} </p>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
+	</div>
 </section>
 <!-- letest product section end -->
 
@@ -150,7 +152,8 @@
 						<img src="{{ url_for('static', filename='img/product/5.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>FAVORITE</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>FAVORITE</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -165,7 +168,8 @@
 						<img src="{{ url_for('static', filename='img/product/6.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>FAVORITE</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>FAVORITE</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -180,7 +184,8 @@
 						<img src="{{ url_for('static', filename='img/product/7.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>WISHLIST</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>WISHLIST</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -195,7 +200,8 @@
 						<img src="{{ url_for('static', filename='img/product/8.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>WISHLIST</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>WISHLIST</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -210,7 +216,8 @@
 						<img src="{{ url_for('static', filename='img/product/9.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>WISHLIST</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>WISHLIST</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -225,7 +232,8 @@
 						<img src="{{ url_for('static', filename='img/product/10.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>WISHLIST</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>WISHLIST</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -240,7 +248,8 @@
 						<img src="{{ url_for('static', filename='img/product/11.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>WISHLIST</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>WISHLIST</span></a>
 						</div>
 					</div>
 					<div class="pi-text">
@@ -255,7 +264,8 @@
 						<img src="{{ url_for('static', filename='img/product/12.jpg') }}" alt="">
 						<div class="pi-links">
 							<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-							<a href="#" class="add-card wishlist-btn"><i class="flaticon-heart"></i><span>WISHLIST</span></a>
+							<a href="#" class="add-card wishlist-btn"><i
+									class="flaticon-heart"></i><span>WISHLIST</span></a>
 						</div>
 					</div>
 					<div class="pi-text">

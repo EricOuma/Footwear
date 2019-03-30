@@ -55,10 +55,11 @@
 				<div class="row">
 					{% for shoe in shoes %}
 					<div class="col-lg-4 col-sm-6">
-						<a href="{{ url_for('.product', id=shoe.id, class_name=shoe.__class__.__name__) }}">
 						<div class="product-item">
 							<div class="pi-pic">
-								<img src="{{ shoe.image_url }}" alt="">
+								<a href="{{ url_for('.product', id=shoe.id, class_name=shoe.__class__.__name__) }}">
+									<img src="{{ shoe.image_url }}" alt="">
+								</a>
 								<div class="pi-links">
 									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
 											CART</span></a>
@@ -66,11 +67,10 @@
 								</div>
 							</div>
 							<div class="pi-text">
-								<h6>Ksh{{ shoe.price }}</h6>
+								<h6>Ksh&nbsp{{ shoe.price }}</h6>
 								<p>{{ shoe.name }}</p>
 							</div>
 						</div>
-					</a>
 					</div>
 					{% endfor %}
 					<!-- <div class="text-center w-100 pt-3">
