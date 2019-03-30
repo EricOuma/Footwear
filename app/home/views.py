@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, abort
 from flask_login import login_required, current_user
-from sqlalchemy import func
+from sqlalchemy import func, desc
 
 from . import home
 from app.models import Customer, Shoe, ShoeSize, Brand, Cloth, ClothSize
@@ -13,7 +13,9 @@ def index():
     """
     if Customer.is_admin(current_user):
         return redirect(url_for('admin.admin_dashboard'))
-    return render_template('home/index.html', title="Welcome")
+    latest_shoes = Shoe.query.order_by(desc(Shoe.timestamp)).limit(6).all()
+    latest_clothes = Cloth.query.order_by(desc(Cloth.timestamp)).limit(6).all()
+    return render_template('home/index.html', l_clothes=latest_clothes, l_shoes=latest_shoes, title="Welcome")
 
 @home.route('/shoes')
 def shoes():
