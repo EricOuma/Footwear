@@ -1,0 +1,57 @@
+{% extends "client_base.html" %}
+{% block title %}Contact Us{% endblock %}
+{% block body %}
+{% block content %}
+<!-- Contact section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 contact-info">
+                <h3>Get in touch</h3>
+                <p>Woodley ,Nairobi</p>
+                <p>+254 712 345678</p>
+                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                        data-cfemail="7b1314080f12151c3b1814150f1a180f55181416">[email&#160;protected]</a></p>
+                <div class="contact-social">
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 contact-info">
+                {% include '_form_errors.html' %}
+                <form method="POST" class="contact-form">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.name.label }}
+                        {{ form.name (class="form-control", placeholder="Your name")}}
+                    </div>
+                    <div class="form-group">
+                        {{ form.phone.label }}
+                        {{ form.phone (class="form-control", placeholder="Your phone number")}}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label }}
+                        {{ form.email (class="form-control", placeholder="Your email(optional)")}}
+                    </div>
+                    <div class="form-group">
+                        {{ form.subject.label }}
+                        {{ form.subject (class="form-control", placeholder="Subject")}}
+                    </div>
+                    <div class="form-group">
+                        {{ form.message.label }}
+                        {{ form.message (class="form-control", placeholder="Message")}}
+                    </div>
+                    {{ form.send (class="site-btn")}}
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- Contact section end -->
+{% endblock %}
+{% endblock %}

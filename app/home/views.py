@@ -1,9 +1,11 @@
-from flask import render_template, redirect, url_for, abort
+from flask import render_template, redirect, url_for, abort, current_app
 from flask_login import login_required, current_user
 from sqlalchemy import func, desc
 
 from . import home
 from app.models import Customer, Shoe, ShoeSize, Brand, Cloth, ClothSize
+from .forms import ContactForm
+from app.emails import send_email
 
 
 @home.route('/')
@@ -59,3 +61,11 @@ def add():
     Route for adding shoes to cart
     """
     return render_template('home/cart.html', title="Shop")
+
+@home.route('/contact', methods=['GET', 'POST'])
+def contact():
+    """Route for the contact page"""
+    form = ContactForm()
+    if form.validate_on_submit():
+        send_email(form.email.data, current_app.config['ADMIN_EMAIL'], form.subject.data, form.message.data)
+    return render_template('home/contact.html', form=form)

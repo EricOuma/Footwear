@@ -22,11 +22,6 @@ $('#imageModal').on('show.bs.modal', function (event) {
 
 
 $(window).on('load', function() {
-	/*------------------
-		Preloder
-	--------------------*/
-	$(".loader").fadeOut();
-	$("#preloder").delay(400).fadeOut("slow");
 
 });
 
